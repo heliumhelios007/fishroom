@@ -1,0 +1,33 @@
+# Godot
+.godot/
+/build/
+/output/
+*.translation
+export_presets.cfg.bak*
+
+# Release artifacts and local builds
+dist/
+*.apk
+*.aab
+*.pck
+*.sparsepck
+
+# Local/private runtime data
+save.json
+*.save
+connection.json
+.env
+.env.*
+*.keystore
+*.jks
+*.pem
+*.key
+logs/
+*.log
+
+# Tests and temporary
+*.tmp
+*.bak
+*.bak-*
+.DS_Store
+Thumbs.db

@@ -1,0 +1,11 @@
+[gd_resource type="Theme" load_steps=2 format=3]
+
+; fishroom 全局 UI 主题（Stage 1 + Stage 2）
+; 内置 Noto Sans SC（SIL OFL 1.1），不再依赖 Windows/Android 系统字体。
+; 字体来源与许可见 assets/fonts/README.md 和 assets/fonts/OFL.txt。
+
+[ext_resource type="FontFile" path="res://assets/fonts/NotoSansSC-Regular.otf" id="1_font"]
+
+[resource]
+default_font = ExtResource("1_font")
+default_font_size = 14

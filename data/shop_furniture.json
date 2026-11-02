@@ -1,0 +1,9 @@
+{
+  "items": [
+    {"id":"painting_whale","name":"鲸鱼挂画","price":45,"category":"挂画","description":"墙上的一抹深海蓝。","order":2,"icon":"res://assets/furniture/icons/wallpainting_whale_icon.png"},
+    {"id":"painting_small_whale","name":"小鲸鱼挂画","price":30,"category":"挂画","description":"小小鲸鱼，静静陪伴。","order":3,"icon":"res://assets/furniture/icons/wallpainting_small_whale_icon.png"},
+    {"id":"painting_coral","name":"珊瑚挂画","price":30,"category":"挂画","description":"让珊瑚点亮一角墙面。","order":4,"icon":"res://assets/furniture/icons/wallpainting_coral_icon.png"},
+    {"id":"tv_stand","name":"电视与电视柜","price":80,"category":"电视","description":"给休闲时光留个位置。","order":5,"icon":"res://assets/furniture/icons/tv_stand_icon.png"},
+    {"id":"carpet_whale","name":"鲸鱼地毯","price":70,"category":"地毯","description":"铺上一片柔软的海洋。","order":6,"icon":"res://assets/furniture/icons/carpet_whale_icon.png"}
+  ]
+}

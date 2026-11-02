@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "currency": "鲸元券",
+  "note": "食物数值按 2026-10-29 更新：大白饭+14、火锅+21、虾粥+17；3 餐约 42/63/51 饥饿/天，接近 50/天衰减。",
+  "simulation": {
+    "hunger_max": 100,
+    "hunger_hours_to_empty": 48,
+    "thirst_max": 100,
+    "thirst_hours_to_empty": 168,
+    "meal_hours": [
+      8,
+      12,
+      18
+    ],
+    "drink_hour": 12,
+    "note": "满 100 不自动吃；没库存跳过；主食按价格从低到高（大白饭→虾粥→火锅），饮品按价格从低到高（矿泉水→快乐水）；饮品 12:00 消耗；离线打开时补算。",
+    "alert_channel": "game_chat",
+    "alert_threshold": 30,
+    "alert_once_per_crossing": true,
+    "auto_consume_if_full": "skip",
+    "auto_consume_if_no_stock": "skip",
+    "staple_priority": "price_asc",
+    "drink_priority": "price_asc",
+    "catch_up_on_open": true
+  },
+  "items": [
+    {
+      "id": "rice",
+      "name": "大白饭",
+      "category": "主食",
+      "price": 2,
+      "hunger": 14,
+      "thirst": 0,
+      "icon": "res://assets/ui/food/rice_bowl_front_256x320.png"
+    },
+    {
+      "id": "hotpot",
+      "name": "海の捞小火锅",
+      "category": "主食",
+      "price": 10,
+      "hunger": 21,
+      "thirst": 0,
+      "icon": "res://assets/ui/food/hai_no_lao_tomato_hotpot_256x320.png"
+    },
+    {
+      "id": "biscuit",
+      "name": "虾粥",
+      "category": "主食",
+      "price": 5,
+      "hunger": 17,
+      "thirst": 0,
+      "icon": "res://assets/ui/food/shrimp_congee_256x320.png"
+    },
+    {
+      "id": "water",
+      "name": "氦之言矿泉水",
+      "category": "饮品",
+      "price": 1,
+      "hunger": 0,
+      "thirst": 11,
+      "icon": "res://assets/ui/food/helium_drink_he3_256x320.png"
+    },
+    {
+      "id": "happy_water",
+      "name": "肥鱼快乐水",
+      "category": "饮品",
+      "price": 3,
+      "hunger": 0,
+      "thirst": 13,
+      "icon": "res://assets/ui/food/fat_fish_cola_script_256x320.png"
+    },
+    {
+      "id": "chips",
+      "name": "好多鱼",
+      "category": "零食",
+      "price": 5,
+      "hunger": 2,
+      "thirst": 0,
+      "icon": "res://assets/ui/food/many_fish.png"
+    },
+    {
+      "id": "moyushuang",
+      "name": "魔鱼爽",
+      "category": "零食",
+      "price": 1,
+      "hunger": 1,
+      "thirst": 0,
+      "icon": "res://assets/ui/food/moyushuang-256x320.png"
+    },
+    {
+      "id": "pomelo",
+      "name": "柚子",
+      "category": "水果",
+      "price": 5,
+      "hunger": 5,
+      "thirst": 5,
+      "icon": "res://assets/ui/food/pomelo_whale_256x320.png"
+    }
+  ]
+}

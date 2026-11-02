@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "daily_reward": 40,
+  "streak_bonus_every_days": 7,
+  "streak_bonus": 100,
+  "reset_on_miss": true,
+  "streak_cross_month": true,
+  "note": "每连续 7 天都给 +100（7/14/21…）；漏一天连续天数重置。跨月是否保留连续天数暂定保留。"
+}

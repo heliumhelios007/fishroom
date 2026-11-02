@@ -1,0 +1,62 @@
+{
+  "canvas": [
+    1920,
+    1080
+  ],
+  "placement": "(0,0), centered=false",
+  "note": "全画布 RGBA 窗外场景；alpha bbox 与房间窗户完全一致，直接叠在房间背景上。",
+  "scenes": [
+    {
+      "id": "sunrise",
+      "name": "清晨—上午",
+      "start_hour": 6,
+      "end_hour": 9,
+      "texture": "res://assets/room/windows/window_sunrise.png",
+      "alpha_bbox": [
+        35,
+        64,
+        356,
+        532
+      ]
+    },
+    {
+      "id": "day",
+      "name": "白天",
+      "start_hour": 9,
+      "end_hour": 16,
+      "texture": "res://assets/room/windows/window_day.png",
+      "alpha_bbox": [
+        35,
+        64,
+        356,
+        532
+      ]
+    },
+    {
+      "id": "sunset",
+      "name": "夕阳",
+      "start_hour": 16,
+      "end_hour": 21,
+      "texture": "res://assets/room/windows/window_sunset.png",
+      "alpha_bbox": [
+        35,
+        64,
+        356,
+        532
+      ]
+    },
+    {
+      "id": "night",
+      "name": "夜晚",
+      "start_hour": 21,
+      "end_hour": 6,
+      "texture": "res://assets/room/windows/window_night.png",
+      "alpha_bbox": [
+        35,
+        64,
+        356,
+        532
+      ]
+    }
+  ]
+}

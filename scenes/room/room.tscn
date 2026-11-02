@@ -1,0 +1,61 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/room/room_view.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/room/room_base.png" id="2_room"]
+[ext_resource type="PackedScene" path="res://scenes/character/whale_girl.tscn" id="3_whale"]
+[ext_resource type="PackedScene" path="res://scenes/ui/game_ui.tscn" id="4_game_ui"]
+[ext_resource type="FontFile" path="res://assets/fonts/NotoSansSC-Regular.otf" id="5_font"]
+[ext_resource type="Script" path="res://scripts/room/furniture_layer.gd" id="7_furniture"]
+
+[node name="Room" type="Node2D" unique_id=779134436]
+script = ExtResource("1_script")
+
+[node name="Background" type="Sprite2D" parent="." unique_id=311284993]
+z_index = -1
+position = Vector2(960, 540)
+texture = ExtResource("2_room")
+
+[node name="FurnitureLayer" type="Node2D" parent="."]
+script = ExtResource("7_furniture")
+
+[node name="CharacterLayer" type="Node2D" parent="." unique_id=710114621]
+visible = false
+z_index = 1
+
+[node name="WhaleGirl" parent="CharacterLayer" unique_id=888801607 instance=ExtResource("3_whale")]
+position = Vector2(951, 871)
+scale = Vector2(1.2, 1.2)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1961965924]
+position = Vector2(960, 540)
+zoom = Vector2(0.6666667, 0.6666667)
+limit_left = 0
+limit_top = 0
+limit_right = 1920
+limit_bottom = 1080
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=485638633]
+
+[node name="Hint" type="Label" parent="UI" unique_id=137507631]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -60.0
+offset_right = -24.0
+offset_bottom = -26.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 1, 1, 0.92)
+theme_override_colors/font_shadow_color = Color(0.03, 0.09, 0.16, 0.7)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("5_font")
+theme_override_font_sizes/font_size = 15
+text = "按住左右拖动 · 环视房间"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GameUI" parent="." instance=ExtResource("4_game_ui")]
+

@@ -1,0 +1,70 @@
+{
+  "canvas": [
+    1920,
+    1080
+  ],
+  "placement": "(0,0), centered=false, additive",
+  "note": "灯罩发光核心；光池由代码生成，池子半径避开地毯/电视。",
+  "lamps": [
+    {
+      "id": "desk",
+      "name": "书桌灯",
+      "texture": "res://assets/room/lamps/lamp_desk_on.png",
+      "alpha_bbox": [
+        189,
+        490,
+        252,
+        544
+      ],
+      "glow_center": [
+        220.5,
+        517.0
+      ],
+      "pool_center": [
+        220,
+        517
+      ],
+      "pool_size": [
+        520,
+        440
+      ],
+      "pool_color": [
+        255,
+        195,
+        115
+      ],
+      "note": "这张只是灯泡/灯罩发光核心；整间屋子的亮度要代码再叠径向光池。"
+    },
+    {
+      "id": "bed",
+      "name": "床头灯",
+      "texture": "res://assets/room/lamps/lamp_bed_on.png",
+      "alpha_bbox": [
+        501,
+        333,
+        562,
+        389
+      ],
+      "glow_center": [
+        531.5,
+        361.0
+      ],
+      "pool_center": [
+        531,
+        361
+      ],
+      "pool_size": [
+        420,
+        360
+      ],
+      "pool_color": [
+        255,
+        195,
+        115
+      ],
+      "note": "这张只是灯泡/灯罩发光核心；整间屋子的亮度要代码再叠径向光池。"
+    }
+  ],
+  "pool_texture": "res://assets/room/lamps/light_pool.png",
+  "pool_blend": "additive; tint with modulate (warm color)"
+}

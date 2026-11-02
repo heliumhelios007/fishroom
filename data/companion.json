@@ -1,0 +1,6 @@
+{
+  "base_url": "http://127.0.0.1:8765",
+  "connect_timeout": 3,
+  "request_timeout": 22,
+  "enabled": true
+}

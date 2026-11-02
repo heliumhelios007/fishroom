@@ -1,0 +1,156 @@
+{
+  "schema_version": 1,
+  "note": "旅行/车票/信件配置。照片顺序固定，信里只引用已有照片，不让 AI 编造未给出的地点。",
+  "locations": [
+    {
+      "id": "hangzhou",
+      "name": "杭州",
+      "origin": "鱼缸",
+      "ticket_art": "res://assets/ui/tickets/ticket_hangzhou.png",
+      "ticket_art_crop": "res://assets/ui/tickets/ticket_hangzhou_crop.png",
+      "unlock": true,
+      "one_ticket_per_location": false,
+      "visited_lock": true,
+      "photos": [
+        {
+          "id": "hz_westlake_santan",
+          "caption": "西湖的水面映着远处的雷峰塔，画舫从三潭印月旁慢慢驶过",
+          "path": "res://assets/travel/hangzhou/westlake_santan.png",
+          "status": "ready"
+        },
+        {
+          "id": "hz_xixi_wetland",
+          "caption": "西溪湿地的水巷穿过树林，木船停在树影里",
+          "path": "res://assets/travel/hangzhou/xixi_wetland.png",
+          "status": "ready"
+        },
+        {
+          "id": "hz_tigerrun_park",
+          "caption": "虎跑公园的亭子临着水池，池底铺满落叶",
+          "path": "res://assets/travel/hangzhou/tigerrun_park.png",
+          "status": "ready"
+        },
+        {
+          "id": "hz_jiuxi_eighteen",
+          "caption": "九溪十八涧的溪水边，红枫遮住了石岸",
+          "path": "res://assets/travel/hangzhou/jiuxi_eighteen.png",
+          "status": "ready"
+        },
+        {
+          "id": "hz_chenghuangge",
+          "caption": "城隍阁立在吴山之上，飞檐外是西湖与杭州城",
+          "path": "res://assets/travel/hangzhou/chenghuangge.png",
+          "status": "ready"
+        },
+        {
+          "id": "hz_deepseek_hq",
+          "caption": "傍晚的深度求索总部，玻璃幕墙映着水岸的灯光",
+          "path": "res://assets/travel/hangzhou/deepseek_hq.png",
+          "status": "ready"
+        },
+        {
+          "id": "hz_liang_easter_egg",
+          "caption": "星河鲸王捧着发光的水晶鲸，背后是星海（虚构彩蛋）",
+          "path": "res://assets/travel/hangzhou/liang_easter_egg.png",
+          "status": "ready",
+          "fictional": true
+        }
+      ],
+      "seats": [
+        {
+          "id": "business",
+          "name": "商务座",
+          "price": 256,
+          "duration_hours": 12,
+          "photo_count": 4,
+          "letters": [
+            {
+              "index": 0,
+              "hour": 2,
+              "photo_ids": [
+                "hz_westlake_santan"
+              ],
+              "route_note": "清晨薄雾、湖面、画舫、三潭印月、远处雷峰塔；写第一眼看到西湖的安静和出发感。",
+              "scene_prompt": "清晨薄雾、湖面、画舫、三潭印月、远处雷峰塔；写第一眼看到西湖的安静和出发感。"
+            },
+            {
+              "index": 1,
+              "hour": 6,
+              "photo_ids": [
+                "hz_chenghuangge"
+              ],
+              "route_note": "吴山、城隍阁、西湖与杭州城交界；写从高处看城市和湖的关系，情绪从安静转向开阔。",
+              "scene_prompt": "吴山、城隍阁、西湖与杭州城交界；写从高处看城市和湖的关系，情绪从安静转向开阔。"
+            },
+            {
+              "index": 2,
+              "hour": 10,
+              "photo_ids": [
+                "hz_deepseek_hq",
+                "hz_liang_easter_egg"
+              ],
+              "route_note": "先写傍晚总部玻璃幕墙、水岸灯光；再把梦里的星河鲸王写成一段虚构的梦或幻想彩蛋，明确是虚构插画，不是现实照片。不指认真实人物、不写公司内部事实；两张 caption 按给定顺序逐字出现。",
+              "scene_prompt": "先写傍晚总部玻璃幕墙、水岸灯光；再把梦里的星河鲸王写成一段虚构的梦或幻想彩蛋，明确是虚构插画，不是现实照片。不指认真实人物、不写公司内部事实；两张 caption 按给定顺序逐字出现。"
+            }
+          ]
+        },
+        {
+          "id": "first",
+          "name": "一等座",
+          "price": 128,
+          "duration_hours": 8,
+          "photo_count": 2,
+          "letters": [
+            {
+              "index": 0,
+              "hour": 2,
+              "photo_ids": [
+                "hz_xixi_wetland"
+              ],
+              "route_note": "水巷、树影、木船、桥；安静、慢下来的第一站。",
+              "scene_prompt": "水巷、树影、木船、桥；安静、慢下来的第一站。"
+            },
+            {
+              "index": 1,
+              "hour": 6,
+              "photo_ids": [
+                "hz_tigerrun_park"
+              ],
+              "route_note": "亭子、山泉、落叶池、林荫；清冽、停顿、想主人的瞬间。",
+              "scene_prompt": "亭子、山泉、落叶池、林荫；清冽、停顿、想主人的瞬间。"
+            }
+          ]
+        },
+        {
+          "id": "second",
+          "name": "二等座",
+          "price": 64,
+          "duration_hours": 4,
+          "photo_count": 1,
+          "letters": [
+            {
+              "index": 0,
+              "hour": 2,
+              "photo_ids": [
+                "hz_jiuxi_eighteen"
+              ],
+              "route_note": "红枫、溪流、石岸；短途、轻快、秋天的颜色。",
+              "scene_prompt": "红枫、溪流、石岸；短途、轻快、秋天的颜色。"
+            }
+          ]
+        }
+      ],
+      "prompt_template": "保留用户 DSH 人格，以第一人称写中文 180–300 字私人旅行信。照片：{photo_captions}。本封场景：{scene_prompt}。每条 caption 必须逐字出现，只写照片和本封场景提供的内容，不增加景点、店铺或人物，结尾自然收束。虚构彩蛋必须明确为梦或幻想中的虚构插画，不指认真实人物或声称真实发生。",
+      "one_purchase_per_seat": true,
+      "location_lock": false,
+      "location_complete_when_all_seats_visited": true
+    }
+  ],
+  "letter_generation": {
+    "mode": "pre_generate_at_purchase",
+    "requires_ds_online_at_purchase": false,
+    "fallback": "none",
+    "note": "AI 生成失败返回错误并等待重试；本地仅保留待生成元数据，不补写正文。"
+  },
+  "photo_aspect": "16:9"
+}

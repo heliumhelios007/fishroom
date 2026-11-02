@@ -1,0 +1,231 @@
+{
+  "room_reference": "res://assets/room/room_full.png",
+  "canvas": [
+    1920,
+    1080
+  ],
+  "items": [
+    {
+      "id": "window_day",
+      "purchasable": false,
+      "room_fixture": true,
+      "room_fixture_source": "base_room",
+      "room_fixture_note": "默认房间结构，room_base.png 已含完整窗户；不叠加 source，不进入商店或拥有列表。保留全画布 source/anchor 作为结构素材参考。",
+      "name": "海景窗（白天）",
+      "category": "window",
+      "texture": "res://assets/furniture/icons/window_day_icon.png",
+      "source": "res://assets/furniture/cutouts/window_day.png",
+      "anchor": [
+        35,
+        64
+      ],
+      "content_size": [
+        321,
+        468
+      ],
+      "trim_rect": [
+        27,
+        56,
+        364,
+        540
+      ],
+      "canvas": [
+        1920,
+        1080
+      ],
+      "shop_category": "furniture",
+      "slot_type": "window",
+      "alignment_offset": [
+        0,
+        0
+      ],
+      "pixel_diff_mean": 1.021,
+      "quality": "几乎像素级（窗帘边缘按原图裁形）",
+      "variants": [
+        "day"
+      ],
+      "pending_variants": [
+        "sunset",
+        "night"
+      ],
+      "alpha_mask": "res://assets/furniture/cutouts/window_day_alpha.png",
+      "variant_note": "三个时段共用同一张 1920x1080 alpha 与画框；只替换玻璃内景色，或输出同画布全窗图。"
+    },
+    {
+      "id": "painting_whale",
+      "name": "鲸鱼挂画",
+      "category": "wall_decor",
+      "texture": "res://assets/furniture/icons/wallpainting_whale_icon.png",
+      "source": "res://assets/furniture/cutouts/wallpainting_whale.png",
+      "anchor": [
+        653,
+        87
+      ],
+      "content_size": [
+        183,
+        180
+      ],
+      "trim_rect": [
+        645,
+        79,
+        844,
+        275
+      ],
+      "canvas": [
+        1920,
+        1080
+      ],
+      "shop_category": "furniture",
+      "slot_type": "wall_decor",
+      "alignment_offset": [
+        0,
+        0
+      ],
+      "pixel_diff_mean": 7.126,
+      "quality": "位置精确，画面/画框为重绘版，非逐像素"
+    },
+    {
+      "id": "painting_small_whale",
+      "name": "小鲸鱼挂画",
+      "category": "wall_decor",
+      "texture": "res://assets/furniture/icons/wallpainting_small_whale_icon.png",
+      "source": "res://assets/furniture/cutouts/wallpainting_small_whale.png",
+      "anchor": [
+        851,
+        113
+      ],
+      "content_size": [
+        70,
+        122
+      ],
+      "trim_rect": [
+        843,
+        105,
+        929,
+        243
+      ],
+      "canvas": [
+        1920,
+        1080
+      ],
+      "shop_category": "furniture",
+      "slot_type": "wall_decor",
+      "alignment_offset": [
+        0,
+        0
+      ],
+      "pixel_diff_mean": 9.926,
+      "quality": "位置精确，画面/画框为重绘版，非逐像素"
+    },
+    {
+      "id": "painting_coral",
+      "name": "珊瑚挂画",
+      "category": "wall_decor",
+      "texture": "res://assets/furniture/icons/wallpainting_coral_icon.png",
+      "source": "res://assets/furniture/cutouts/wallpainting_coral.png",
+      "anchor": [
+        1208,
+        71
+      ],
+      "content_size": [
+        82,
+        125
+      ],
+      "trim_rect": [
+        1200,
+        63,
+        1298,
+        204
+      ],
+      "canvas": [
+        1920,
+        1080
+      ],
+      "shop_category": "furniture",
+      "slot_type": "wall_decor",
+      "alignment_offset": [
+        0,
+        0
+      ],
+      "pixel_diff_mean": 0.0,
+      "quality": "像素级一致"
+    },
+    {
+      "id": "tv_stand",
+      "name": "电视与电视柜",
+      "category": "furniture_tv",
+      "texture": "res://assets/furniture/icons/tv_stand_icon.png",
+      "source": "res://assets/furniture/cutouts/tv_stand.png",
+      "anchor": [
+        1204,
+        631
+      ],
+      "content_size": [
+        485,
+        449
+      ],
+      "trim_rect": [
+        1196,
+        623,
+        1697,
+        1080
+      ],
+      "canvas": [
+        1920,
+        1080
+      ],
+      "shop_category": "furniture",
+      "slot_type": "tv",
+      "alignment_offset": [
+        0,
+        0
+      ],
+      "pixel_diff_mean": 0.019,
+      "quality": "像素级一致（含电视柜与绿植）"
+    },
+    {
+      "id": "carpet_whale",
+      "render_offset_y": 72,
+      "render_offset_note": "仅房间渲染向下 72px；全画布 source/anchor 与商店 icon 不变。脚底 x≈951 处地毯前缘原 y≈812，+39 仍不足；+72 让 y=871 脚底落入地毯。",
+      "name": "鲸鱼地毯",
+      "category": "furniture_rug",
+      "texture": "res://assets/furniture/icons/carpet_whale_icon.png",
+      "source": "res://assets/furniture/cutouts/carpet_whale.png",
+      "anchor": [
+        703,
+        548
+      ],
+      "content_size": [
+        553,
+        284
+      ],
+      "trim_rect": [
+        695,
+        540,
+        1264,
+        840
+      ],
+      "canvas": [
+        1920,
+        1080
+      ],
+      "shop_category": "furniture",
+      "slot_type": "rug",
+      "alignment_offset": [
+        0,
+        0
+      ],
+      "pixel_diff_mean": 5.034,
+      "quality": "位置精确，重绘版；正常观看无缝"
+    }
+  ],
+  "base_room": "res://assets/room/room_base.png",
+  "base_room_native": "res://assets/room/room_base.png",
+  "base_room_native_size": [
+    1920,
+    1080
+  ],
+  "base_room_note": "Native 1920x1080; cutouts align at (0,0), no scaling needed. The earlier 1672x941 was the chat preview normalization, not the source size.",
+  "base_room_alignment": "structural best offsets all (0,0); MAE 4.12-6.86 due to AI re-render, not position shift",
+  "base_room_quality_note": "Current PNG is decoded from the chat-normalized WebP. If you have the original 1920x1080 PNG (~4.1 MB), replace this file for maximum fidelity; alignment is unaffected."
+}
