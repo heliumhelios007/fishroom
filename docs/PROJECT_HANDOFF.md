@@ -516,12 +516,12 @@ py -3 tools/android_package.py --audit dist/fishroom-debug.apk
 如果 Windows 的 `python` 是 Microsoft Store 存根、`py` 也不存在，本机开发直接用 DSH bundled Python：
 
 ```powershell
-& 'C:\Users\heliu\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\python\python.exe' tools/android_package.py --audit dist/fishroom-debug.apk
+& "$env:USERPROFILE\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\python\python.exe" tools/android_package.py --audit dist/fishroom-debug.apk
 ```
 
 公共机器没有该路径时安装 Python 3.10+ 或使用 `py -3`。审计脚本必须有可工作的解释器，否则发布流程视为阻塞，不能跳过。
 
-> 公开仓库当前不包含 `tools/`；需要做内容包/APK 审计时，应在开发树使用完整工具，不要把审计产物提交到公开仓库。
+> 公开仓库包含 `tools/` 的纯标准库审计脚本；在 clone 根目录执行即可。`logs/`、`dist/` 和审计产物不入库。
 
 检查：
 

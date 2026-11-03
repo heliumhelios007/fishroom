@@ -28,7 +28,7 @@
 - 跑引擎只用 `godot_*` 工具，绝不 shell 启动 Godot。
 - 本机审计命令（DSH bundled Python）：
   ```powershell
-  & 'C:\Users\heliu\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\python\python.exe' tools/android_package.py --audit dist/fishroom-debug.apk
+  & "$env:USERPROFILE\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\python\python.exe" tools/android_package.py --audit dist/fishroom-debug.apk
   ```
   公共机器没有该路径时使用 `py -3` 或安装 Python 3.10+。
 - 发布前 gate：
