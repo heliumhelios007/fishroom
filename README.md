@@ -38,6 +38,7 @@ Android 构建配置在 `export_presets.cfg`；Android 包不包含 DSH、QQ bri
 
 - [玩家 DSH / QQ 接入](docs/PLAYER_DSH_QQ_SETUP.md)
 - [修改者指南](docs/MODDING_GUIDE.md)
+- [项目交接与技术维护指南](docs/PROJECT_HANDOFF.md)
 
 ## 素材与署名
 
