@@ -8,8 +8,8 @@
 - 存档结构版本：1
 - 内置内容版本：`base-1`
 - 公开分支：`main`
-- Android release：v1.0.0（旧包）；v1.1.1 为修复版
-- Windows release：v1.1.1（修复 autoload 问题）
+- Android release：v1.1.1（修复 autoload 版）
+- Windows release：v1.1.2（v1.1.1 的包内许可/文档分层修复版）
 
 ---
 
@@ -513,7 +513,13 @@ godot_export_project:
 py -3 tools/android_package.py --audit dist/fishroom-debug.apk
 ```
 
-如果 Windows 的 `python` 是 Microsoft Store 存根，使用 `py -3`、安装 Python 3.10+，或使用 DSH 开发环境的 bundled Python。审计脚本必须有可工作的解释器，否则发布流程视为阻塞，不能跳过。
+如果 Windows 的 `python` 是 Microsoft Store 存根、`py` 也不存在，本机开发直接用 DSH bundled Python：
+
+```powershell
+& 'C:\Users\heliu\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\python\python.exe' tools/android_package.py --audit dist/fishroom-debug.apk
+```
+
+公共机器没有该路径时安装 Python 3.10+ 或使用 `py -3`。审计脚本必须有可工作的解释器，否则发布流程视为阻塞，不能跳过。
 
 > 公开仓库当前不包含 `tools/`；需要做内容包/APK 审计时，应在开发树使用完整工具，不要把审计产物提交到公开仓库。
 
@@ -542,18 +548,31 @@ preset：Windows Desktop
 release 不包含 DEV/调试面板
 ```
 
-发布 ZIP 建议包含：
+发布前：
+
+1. 运行 `py -3 tools/windows_preset.py` 重新生成 Windows `export_files`（或使用本机 bundled Python）；确认它和 live `runtime_files()` 一致。
+2. 运行 `godot_export_project`，输出 `fishroom.exe`。
+3. 运行 `py -3 tools/windows_pck_audit.py <exe>`；它解析内嵌 PCK，检查 forbidden/unknown/debug、脚本/JSON/导入资源 1:1，并断言 preset 白名单不陈旧；失败不能发布。
+4. 真实双击启动一次 EXE，检查 `%APPDATA%\Godot\app_userdata\fishroom\logs\godot.log` 无 autoload/资源错误。工具边界内不能启动 EXE 时，必须明确标记未执行。
+
+发布 ZIP 结构（v1.1.2 起）：
 
 ```text
 fishroom.exe
 README.md
-PLAYER_DSH_QQ_SETUP.md
-MODDING_GUIDE.md
+LICENSE
 THIRD_PARTY_NOTICES.md
+docs/PLAYER_DSH_QQ_SETUP.md
+docs/MODDING_GUIDE.md
+maintainer/PROJECT_HANDOFF.md
+maintainer/AGENTS.md
+maintainer/STAGE_STATUS.md
 licenses/CHARACTER_CREDITS.md
 ```
 
-Windows 与 Android 共用 save 格式。自动云同步没有实现；当前通过导出/导入迁移。
+- 玩家文档放 `docs/`，维护者文档放 `maintainer/`，不混在根目录。
+- `LICENSE` 和 `THIRD_PARTY_NOTICES.md` 必须随二进制分发；README 里的链接必须指向包内真实文件。
+- 自动云同步没有实现；Windows/Android 通过导出/导入迁移存档。
 
 ---
 

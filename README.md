@@ -43,7 +43,8 @@ Android 构建配置在 `export_presets.cfg`；Android 包不包含 DSH、QQ bri
 ## 下载
 
 - [Releases](https://github.com/heliumhelios007/fishroom/releases)
-- v1.1.1：Windows 桌面修复版 + Android 修复版（已移除开发 autoload）
+- v1.1.2：Windows 桌面修复版（补 LICENSE/第三方声明，维护者文档分层）
+- v1.1.1：Android 修复版（已移除开发 autoload）
 - v1.0.0：早期 Android debug APK
 
 ## 素材与署名

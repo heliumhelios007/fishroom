@@ -14,7 +14,7 @@
 7. 旅行/信件只使用 `last_sim_time` 模拟时钟。
 8. 鲸鱼娘角色/动作素材非商业，公开二创必须署名；不能按 MIT 重新授权。
 9. 发布包不得包含 logs/docs 验收记录/tests/正式存档/连接配置/角色卡/记忆/开发 runtime。
-10. 导出前 `project.godot` 的 autoload 只能有 `DisplayProfile`、`GameState`；`McpInteractionServer` 只允许编辑器调试动态加载，不能留在发布源码或包内。
+10. 导出前 `project.godot` 的 autoload 只能有 `DisplayProfile`、`GameState`。`autoload/mcp_interaction_server.gd` 文件可以保留在源码里供编辑器动态加载，但绝不能作为 autoload 进入 EXE/APK。
 
 ## 开工前
 
@@ -26,12 +26,19 @@
 
 - 脚本先跑 `godot_validate_script`。
 - 跑引擎只用 `godot_*` 工具，绝不 shell 启动 Godot。
+- 本机审计命令（DSH bundled Python）：
+  ```powershell
+  & 'C:\Users\heliu\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\python\python.exe' tools/android_package.py --audit dist/fishroom-debug.apk
+  ```
+  公共机器没有该路径时使用 `py -3` 或安装 Python 3.10+。
 - 发布前 gate：
-  1. 清掉 `McpInteractionServer`；
+  1. 清掉 `project.godot` 的 `McpInteractionServer` autoload（脚本文件可以保留给编辑器）；
   2. 检查 autoload；
-  3. 导出；
-  4. 真实启动 EXE/APK；
-  5. 检查包内无 logs/docs/tests/个人数据。
+  3. **重跑 `tools/android_package.py` 的 prepare，确认白名单不比源码旧**；
+  4. 导出；
+  5. 跑 `tools/windows_pck_audit.py` / APK audit；
+  6. 真实启动 EXE/APK；
+  7. 检查包内无 logs/docs/tests/个人数据。
 - 证据放 `logs/<task>/`；未执行不能写成通过。
 
 ## 回报模板
