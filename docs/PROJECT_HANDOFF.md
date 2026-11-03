@@ -4,12 +4,12 @@
 
 - 仓库：https://github.com/heliumhelios007/fishroom
 - 引擎：Godot 4.7.2 stable
-- 当前游戏版本：1.0.0
+- 当前游戏版本：1.1.1
 - 存档结构版本：1
 - 内置内容版本：`base-1`
 - 公开分支：`main`
-- Android release：v1.0.0
-- Windows release：v1.1.0
+- Android release：v1.0.0（旧包）；v1.1.1 为修复版
+- Windows release：v1.1.1（修复 autoload 问题）
 
 ---
 
@@ -24,7 +24,8 @@
 7. **存档写入必须保持原子性**：先写 `.tmp`，成功后 rename；失败保留旧档。
 8. **旅行/信件时间必须使用同一个模拟时钟**。不要混用 `Time.get_unix_time_from_system()` 和 `last_sim_time`。
 9. **桌面和手机是两个显示 profile，不是两份游戏**。业务状态、存档、DSH 接入共用。
-10. **发布包不能包含 logs、tests、docs 验收记录、个人存档、连接配置、角色卡、记忆或开发 runtime。**
+10. **发布前必须清掉 `McpInteractionServer` autoload**。发布源码的 autoload 只能有 `DisplayProfile`、`GameState`；该脚本只允许编辑器调试时动态加载，不能进入 EXE/APK。
+11. **发布包不能包含 logs、tests、docs 验收记录、个人存档、连接配置、角色卡、记忆或开发 runtime。**
 
 ---
 
@@ -76,7 +77,7 @@ project.godot
   autoload:
     DisplayProfile  (scripts/display_profile.gd)
     GameState       (scripts/game_state.gd)
-    McpInteractionServer (autoload/mcp_interaction_server.gd, 仅编辑器调试动态使用)
+    # McpInteractionServer 不是 autoload；仅编辑器调试由 room_view 动态加载
 
 room.tscn
   Room (room_view.gd)
@@ -509,8 +510,12 @@ godot_export_project:
 ### 10.4 审计
 
 ```powershell
-python tools/android_package.py --audit dist/fishroom-debug.apk
+py -3 tools/android_package.py --audit dist/fishroom-debug.apk
 ```
+
+如果 Windows 的 `python` 是 Microsoft Store 存根，使用 `py -3`、安装 Python 3.10+，或使用 DSH 开发环境的 bundled Python。审计脚本必须有可工作的解释器，否则发布流程视为阻塞，不能跳过。
+
+> 公开仓库当前不包含 `tools/`；需要做内容包/APK 审计时，应在开发树使用完整工具，不要把审计产物提交到公开仓库。
 
 检查：
 
@@ -630,7 +635,11 @@ Windows 与 Android 共用 save 格式。自动云同步没有实现；当前通
 
 ## 15. 提交/PR 检查
 
+**提交基线是公开仓库 clone，不是 `D:\fishroom` 开发树。** 开发树的 logs/dist/个人配置不进入 PR。
+
 - [ ] 没有个人 ID、QQ/群号、token、密钥、正式存档、记忆、角色卡
+- [ ] `project.godot` autoload 只有 `DisplayProfile`、`GameState`
+- [ ] 发布源码没有 `McpInteractionServer` autoload
 - [ ] 没有把日志/验收记录/测试产物加入仓库
 - [ ] 新增内容可被旧档安全读取
 - [ ] 改动覆盖手机 + Windows
