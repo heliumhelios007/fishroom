@@ -40,6 +40,12 @@ Android 构建配置在 `export_presets.cfg`；Android 包不包含 DSH、QQ bri
 - [修改者指南](docs/MODDING_GUIDE.md)
 - [项目交接与技术维护指南](docs/PROJECT_HANDOFF.md)
 
+## 下载
+
+- [Releases](https://github.com/heliumhelios007/fishroom/releases)
+- v1.1.1：Windows 桌面修复版 + Android 修复版（已移除开发 autoload）
+- v1.0.0：早期 Android debug APK
+
 ## 素材与署名
 
 - 鲸鱼娘形象与动作帧来自 **PC2005-cloud/dsh-pet**：
