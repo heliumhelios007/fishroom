@@ -17,8 +17,9 @@ config/features=PackedStringArray("4.7")
 config/icon="res://assets/ui/app_icon.png"
 [autoload]
 
+DisplayProfile="*res://scripts/display_profile.gd"
 GameState="*res://scripts/game_state.gd"
-
+McpInteractionServer="*res://autoload/mcp_interaction_server.gd"
 [debug]
 
 file_logging/enable_file_logging.android=false
@@ -30,6 +31,10 @@ window/size/viewport_width=405
 window/size/viewport_height=720
 window/size/window_width_override=540
 window/size/window_height_override=960
+window/size/viewport_width.windows=1280
+window/size/viewport_height.windows=720
+window/size/window_width_override.windows=1280
+window/size/window_height_override.windows=720
 window/stretch/mode="canvas_items"
 window/handheld/orientation=1
 

@@ -49,7 +49,10 @@ func _sync_travel_presence() -> void:
 	character_layer.visible = not GameState.is_traveling()
 	if was_away and character_layer.visible:
 		$CharacterLayer/WhaleGirl.play("idle")
-	hint.text = "小鲸鱼去旅行了 · 环视房间" if GameState.is_traveling() else "按住左右拖动 · 环视房间"
+	if DisplayProfile.is_desktop():
+		hint.text = "小鲸鱼去旅行了 · F11 全屏" if GameState.is_traveling() else "点击小鲸鱼选择动作 · F11 全屏"
+	else:
+		hint.text = "小鲸鱼去旅行了 · 环视房间" if GameState.is_traveling() else "按住左右拖动 · 环视房间"
 
 
 func _on_travel_completed(_location_name: String) -> void:
@@ -57,6 +60,8 @@ func _on_travel_completed(_location_name: String) -> void:
 
 
 func _process(delta: float) -> void:
+	if DisplayProfile.is_desktop():
+		return
 	var axis := Input.get_axis("ui_left", "ui_right")
 	if axis != 0.0:
 		camera.position.x += axis * KEYBOARD_PAN_SPEED * delta
@@ -121,7 +126,7 @@ func _drag_to(screen_x: float) -> void:
 
 
 func _drag_by(screen_dx: float) -> void:
-	if is_zero_approx(screen_dx):
+	if DisplayProfile.is_desktop() or is_zero_approx(screen_dx):
 		return
 	# 手指往右拖，画面跟着往右走，所以相机往左移。
 	camera.position.x -= screen_dx / camera.zoom.x
@@ -132,13 +137,16 @@ func _fit_camera() -> void:
 	var viewport_size := get_viewport_rect().size
 	if viewport_size.x <= 0.0 or viewport_size.y <= 0.0:
 		return
-	# cover：保证房间图始终铺满取景器，不露出底色。
-	var fit_zoom := maxf(viewport_size.y / ROOM_SIZE.y, viewport_size.x / ROOM_SIZE.x)
+	# Mobile keeps cover; desktop fits the entire room without moving world nodes.
+	var fit_zoom := DisplayProfile.camera_zoom(viewport_size)
 	camera.zoom = Vector2(fit_zoom, fit_zoom)
-	camera.limit_left = 0
-	camera.limit_right = int(ROOM_SIZE.x)
-	camera.limit_top = 0
-	camera.limit_bottom = int(ROOM_SIZE.y)
+	# Fit may see beyond the room on non-16:9 windows. Allow symmetric margins.
+	var visible_size := viewport_size / fit_zoom
+	var margin := (visible_size - ROOM_SIZE).max(Vector2.ZERO) * 0.5 if DisplayProfile.is_desktop() else Vector2.ZERO
+	camera.limit_left = -ceili(margin.x)
+	camera.limit_right = int(ROOM_SIZE.x) + ceili(margin.x)
+	camera.limit_top = -ceili(margin.y)
+	camera.limit_bottom = int(ROOM_SIZE.y) + ceili(margin.y)
 	_clamp_camera()
 
 
@@ -146,6 +154,9 @@ func _fit_camera() -> void:
 # 竖屏 405×720 时 half_w≈303.75、half_h=540，所以 x 只能落在 [303.75, 1616.25]，
 # 否则画面边缘会露出房间图外的底色。
 func _clamp_camera() -> void:
+	if DisplayProfile.is_desktop():
+		camera.position = ROOM_SIZE * 0.5
+		return
 	var viewport_size := get_viewport_rect().size
 	var half_w := viewport_size.x / (2.0 * camera.zoom.x)
 	var half_h := viewport_size.y / (2.0 * camera.zoom.y)

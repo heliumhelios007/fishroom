@@ -1,8 +1,7 @@
 extends CanvasLayer
 ## fishroom — 常驻 UI / 日历 / 商店背包 / 旅行相簿 / 用户发起的 DS 聊天
 ##
-## 尺寸全部按设计分辨率 405×720 写死（窗口 540×960 由项目 stretch 放大 4/3），
-## 所以这里用固定 px 而不是按屏宽换算：135px 的条正好是屏宽的 1/3。
+## 手机沿用 405×720 设计和原有坐标；DesktopLayout 在桌面重排同一套控件。
 ## 打卡/商店/背包/聊天/旅行/相簿/设置接真实页面；日记保留占位提示。
 ##
 ## 结构（scenes/ui/game_ui.tscn）：
@@ -137,6 +136,7 @@ var _menu_tween: Tween
 var _toast_tween: Tween
 var _calendar_date := ""
 var _action_panel: PanelContainer
+var _desktop_layout: Node
 
 
 func _ready() -> void:
@@ -181,6 +181,10 @@ func _ready() -> void:
 	date_timer.timeout.connect(_on_calendar_tick)
 	add_child(date_timer)
 	date_timer.start()
+	if DisplayProfile.is_desktop():
+		_desktop_layout = preload("res://scripts/ui/desktop_layout.gd").new()
+		add_child(_desktop_layout)
+		_desktop_layout.setup($Root)
 
 
 # —————————————————— 对外小 API（验收/后续页面用）——————————————————
@@ -195,6 +199,8 @@ func close_menu() -> void:
 
 ## 打开/关闭总 UI 菜单。Stage 1 没有遮罩：菜单开着时房间仍然可见、可拖动（面板区域除外）。
 func set_menu_open(open: bool) -> void:
+	if DisplayProfile.is_desktop() and is_instance_valid(_action_panel):
+		_action_panel.hide()
 	if open and (_calendar.visible or _shop.visible or _backpack.visible or _chat.visible or _travel_overlay.visible or _album_overlay.visible or _letter_overlay.visible or _settings.visible):
 		return
 	if _menu_tween and _menu_tween.is_valid():
@@ -708,6 +714,7 @@ func _on_import_file_selected(path: String) -> void:
 	confirm.name = "ConfirmButton"
 	confirm.pressed.connect(_confirm_import)
 	_place(confirm, panel, Rect2(175, 166, 142, 40))
+	_layout_transients()
 
 
 func _cancel_import() -> void:
@@ -737,6 +744,14 @@ func _place(node: Control, parent: Node, rectangle: Rect2) -> void:
 	parent.add_child(node)
 	node.position = rectangle.position
 	node.size = rectangle.size
+	if DisplayProfile.is_desktop() and node is Label:
+		node.clip_text = true
+		node.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+
+
+func _layout_transients() -> void:
+	if is_instance_valid(_desktop_layout):
+		_desktop_layout.layout_transients()
 
 
 func _label(text: String, font_size: int = 14, color: Color = COLOR_ITEM_TEXT) -> Label:
@@ -745,6 +760,10 @@ func _label(text: String, font_size: int = 14, color: Color = COLOR_ITEM_TEXT) -
 	label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	label.add_theme_font_size_override("font_size", font_size)
 	label.add_theme_color_override("font_color", color)
+	if DisplayProfile.is_desktop():
+		# Long imported titles must not increase a scroll container's minimum width.
+		label.clip_text = true
+		label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 	return label
 
 
@@ -789,6 +808,8 @@ func _money(parent: Node, value: int, prefix: String = "", font_size: int = 14) 
 	icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	row.add_child(icon)
 	var amount := _label(str(value), font_size)
+	# Money rows measure their natural width (icon + number).
+	amount.clip_text = false
 	amount.name = "Amount"
 	row.add_child(amount)
 	return row
@@ -1105,6 +1126,7 @@ func _buy_food(item_id: String) -> void:
 	_food_confirm.pressed.connect(_confirm_food_purchase)
 	_place(_food_confirm, panel, Rect2(160, 470, 150, 36))
 	_refresh_food_purchase()
+	_layout_transients()
 
 
 func _food_quantity_limit(price: int) -> int:
@@ -1293,6 +1315,7 @@ func open_purchase(location_id: String, seat_id: String) -> void:
 	_confirm_button.pressed.connect(_confirm_purchase)
 	_place(_confirm_button, panel, Rect2(152, 317, 140, 38))
 	_refresh_purchase_state()
+	_layout_transients()
 
 
 func _refresh_purchase_state() -> void:
@@ -1958,6 +1981,7 @@ func open_diary() -> void:
 	var diary := preload("res://scripts/ui/diary_panel.gd").new()
 	diary.client = _companion
 	$Root.add_child(diary)
+	_layout_transients()
 	diary.tree_exiting.connect(func():
 		if is_instance_valid(backdrop):
 			backdrop.queue_free()
@@ -2014,7 +2038,10 @@ func _toggle_action_panel() -> void:
 	if GameState.is_traveling():
 		_action_panel.hide()
 		return
-	_action_panel.visible = not _action_panel.visible
+	var should_open := not _action_panel.visible
+	if DisplayProfile.is_desktop():
+		close_menu()
+	_action_panel.visible = should_open
 
 
 func _play_character_action(action: String) -> void:

@@ -26,6 +26,14 @@
 
 Android 构建配置在 `export_presets.cfg`；Android 包不包含 DSH、QQ bridge 或 memory 服务。
 
+## Windows 桌面版
+
+- 默认 1280×720，可调整窗口并支持全屏
+- 相机显示完整 1920×1080 房间，不再使用手机竖屏裁切
+- 桌面 UI 使用限宽/居中布局；手机端保持原竖屏布局
+- Windows 与 Android 共用同一份存档格式，可用导出/导入在两端迁移
+- 构建 preset：`Windows Desktop`，输出 `dist/fishroom-windows/fishroom.exe`
+
 ## 文档
 
 - [玩家 DSH / QQ 接入](docs/PLAYER_DSH_QQ_SETUP.md)

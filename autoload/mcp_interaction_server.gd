@@ -18,9 +18,6 @@ var _key_map: Dictionary
 var _held_keys: Dictionary = {}
 
 func _ready() -> void:
-	if OS.has_feature("android") or not OS.has_feature("debug") or OS.has_feature("fishroom_clean"):
-		set_process(false)
-		return
 	# Ensure MCP server keeps processing even when game is paused
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	_init_key_map()

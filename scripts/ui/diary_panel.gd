@@ -41,6 +41,7 @@ func _ready() -> void:
 	connect_button.pressed.connect(_connection_form)
 	box.add_child(connect_button)
 	var scroll := ScrollContainer.new()
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED if DisplayProfile.is_desktop() else ScrollContainer.SCROLL_MODE_AUTO
 	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	box.add_child(scroll)
 	content = VBoxContainer.new()
@@ -100,6 +101,9 @@ func _text(value: String) -> void:
 func _button(text: String, action: Callable) -> void:
 	var button := Button.new()
 	button.text = text
+	if DisplayProfile.is_desktop():
+		button.clip_text = true
+		button.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 	button.custom_minimum_size.y = 36
 	_style_button(button)
 	button.pressed.connect(action)
